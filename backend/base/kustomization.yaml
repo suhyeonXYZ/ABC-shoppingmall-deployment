@@ -9,3 +9,5 @@ resources:
 - service-active.yaml
 - service-preview.yaml
 - ingress.yaml
+spec:
+  suspend: false
