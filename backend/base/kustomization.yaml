@@ -3,11 +3,11 @@ kind: Kustomization
 metadata:
   name: backend-kustomization 
   namespace: backend           
-resources:
-- rollout.yaml
-- keda.yaml
-- service-active.yaml
-- service-preview.yaml
-- ingress.yaml
 spec:
   suspend: false
+  resources:
+    - rollout.yaml
+    - keda.yaml
+    - service-active.yaml
+    - service-preview.yaml
+    - ingress.yaml
