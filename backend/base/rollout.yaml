@@ -44,4 +44,3 @@ spec:
         previewService: backend-preview
         autoPromotionEnabled: true
         scaleDownDelaySeconds: 30
-
