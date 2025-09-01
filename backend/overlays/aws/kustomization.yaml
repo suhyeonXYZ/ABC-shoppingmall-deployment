@@ -8,10 +8,10 @@ replicas:
   name: backend
 
 images:
-- name: backend-image
+- name: 983460235393.dkr.ecr.ap-northeast-2.amazonaws.com/ssh-backend:0.1.0
 
 patches:
 - path: resource-patch.yaml
   target:
-    kind: Deployment
+    kind: Rollout
     name: backend

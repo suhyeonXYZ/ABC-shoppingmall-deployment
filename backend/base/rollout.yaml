@@ -1,10 +1,11 @@
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
 metadata:
   name: backend
   labels:
     app: backend
 spec:
+  replicas: 1
   selector:
     matchLabels:
       app: backend
@@ -15,7 +16,7 @@ spec:
     spec:
       containers:
       - name: backend
-        image: backend-image
+        image: 983460235393.dkr.ecr.ap-northeast-2.amazonaws.com/ssh-backend:0.1.0
         ports:
         - containerPort: 8000
         env:
@@ -35,3 +36,10 @@ spec:
             port: 8000
           initialDelaySeconds: 15
           periodSeconds: 20
+    strategy:
+      blueGreen:
+        activeService: backend-active
+        previewService: backend-preview
+        autoPromotionEnabled: true
+        scaleDownDelaySeconds: 30
+
