@@ -1,0 +1,17 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+- ../../base
+
+replicas:
+- count: 1
+  name: backend
+
+images:
+- name: backend-image
+
+patches:
+- path: resource-patch.yaml
+  target:
+    kind: Deployment
+    name: backend

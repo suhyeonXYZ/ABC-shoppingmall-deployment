@@ -1,0 +1,21 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+- ../../base
+
+replicas:
+- count: 1
+  name: frontend
+
+images:
+- name: frontend-image
+
+patches:
+- path: resource-patch.yaml
+  target:
+    kind: Deployment
+    name: frontend
+- path: configmap-patch.yaml
+  target:
+    kind: ConfigMap
+    name: frontend-config
