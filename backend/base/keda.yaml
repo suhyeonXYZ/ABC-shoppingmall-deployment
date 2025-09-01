@@ -1,12 +1,12 @@
 apiVersion: keda.sh/v1alpha1
 kind: ScaledObject
 metadata:
-  name: backend
+  name: backend-keda
 spec:
   scaleTargetRef:
     apiVersion: argoproj.io/v1alpha1
     kind: Rollout
-    name: backend
+    name: backend-rollout
   minReplicaCount: 1
   maxReplicaCount: 10
   triggers:
