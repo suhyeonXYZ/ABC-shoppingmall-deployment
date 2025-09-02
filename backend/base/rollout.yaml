@@ -2,19 +2,19 @@ apiVersion: argoproj.io/v1alpha1
 kind: Rollout
 metadata:
   name: backend-rollout
-  namespace: backend 
+  namespace: backend
   labels:
     app: backend
 spec:
   selector:
     matchLabels:
       app: backend
-      version: blue
+      version: canary
   template:
     metadata:
       labels:
         app: backend
-        version: blue
+        version: canary
     spec:
       containers:
       - name: backend
@@ -38,9 +38,17 @@ spec:
             port: 8000
           initialDelaySeconds: 15
           periodSeconds: 20
-    strategy:
-      blueGreen:
-        activeService: backend-active
-        previewService: backend-preview
-        autoPromotionEnabled: true
-        scaleDownDelaySeconds: 30
+  strategy:
+    canary:
+      steps:
+      - setWeight: 20         # 트래픽 20%를 canary에 전달
+      - pause: {duration: 10s} # 10초 대기 후 다음 단계 진행
+      - setWeight: 50
+      - pause: {duration: 10s}
+      - setWeight: 100        # 100% 전환
+      - pause: {}
+      trafficRouting:
+        ingress:
+          name: backend-ingress
+          serviceName: backend-active
+          servicePort: 80
