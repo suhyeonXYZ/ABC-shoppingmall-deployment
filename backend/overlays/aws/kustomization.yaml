@@ -1,17 +1,8 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-- ../../base
-
-replicas:
-- count: 1
-  name: backend
-
+  - ../../base
 images:
-- name: 983460235393.dkr.ecr.ap-northeast-2.amazonaws.com/ssh-backend:0.1.0
-
-patches:
-- path: resource-patch.yaml
-  target:
-    kind: Rollout
-    name: backend
+  - name: 983460235393.dkr.ecr.ap-northeast-2.amazonaws.com/ssh-backend:0.1.0
+patchesStrategicMerge:
+  - resource-patch.yaml

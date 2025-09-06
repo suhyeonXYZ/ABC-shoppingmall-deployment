@@ -4,7 +4,6 @@ metadata:
   name: backend-kustomization 
   namespace: backend           
 spec:
-  suspend: false
   resources:
     - rollout.yaml
     - keda.yaml
