@@ -5,7 +5,7 @@ metadata:
   namespace: backend
 spec:
   interval: 1m
-  path: "./base"
+  path: "./"
   prune: true
   sourceRef:
     kind: GitRepository
